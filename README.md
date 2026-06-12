@@ -1,31 +1,60 @@
-This is a Kotlin Multiplatform project targeting Android, iOS.
+# Rick and Morty - Kotlin Multiplatform
 
-* [/iosApp](./iosApp/iosApp) contains an iOS application. Even if you’re sharing your UI with Compose Multiplatform,
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+A Kotlin Multiplatform (KMP) project that consumes the [Rick and Morty API](https://rickandmortyapi.com/) to display characters, locations, and episodes. Built with **Compose Multiplatform**, targeting Android and iOS.
 
-* [/shared](./shared/src) is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - [commonMain](./shared/src/commonMain/kotlin) is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    the [iosMain](./shared/src/iosMain/kotlin) folder would be the right place for such calls.
-    Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./shared/src/jvmMain/kotlin)
-    folder is the appropriate location.
+## 🚀 Features
 
-### Running the apps
+- **Characters**: Explore the cast of Rick and Morty.
+  - Search characters by name.
+  - View status, species, and images.
+- **Locations**: Discover the various settings in the multiverse.
+- **Episodes**: Keep track of all episodes and their air dates.
+- **Shared UI**: 100% Shared UI using Compose Multiplatform.
+- **Modern Tech Stack**: Uses the latest libraries for networking, serialization, and image loading.
 
-Use the run configurations provided by the run widget in your IDE's toolbar. You can also use these commands and options:
+## 🛠 Tech Stack
 
-- Android app: `./gradlew :androidApp:assembleDebug`
-- iOS app: open the [/iosApp](./iosApp) directory in Xcode and run it from there.
+- **Compose Multiplatform**: For building the shared UI on Android and iOS.
+- **Ktor**: Multiplatform HTTP client for networking.
+- **Kotlinx Serialization**: For parsing JSON responses.
+- **KMP-ViewModel**: Shared ViewModels for managing state.
+- **Coil3**: Multiplatform image loading.
+- **Material 3**: For a modern and clean design.
 
-### Running tests
+## 📁 Project Structure
 
-Use the run button in your IDE's editor gutter, or run tests using Gradle tasks:
+- `shared`: Contains the core logic and UI shared between platforms.
+  - `commonMain`: Shared code (API, Models, ViewModels, and Compose UI).
+  - `androidMain`: Android-specific implementations.
+  - `iosMain`: iOS-specific implementations.
+- `androidApp`: Entry point for the Android application.
+- `iosApp`: Entry point for the iOS application.
 
-- Android tests: `./gradlew :shared:testAndroidHostTest`
-- iOS tests: `./gradlew :shared:iosSimulatorArm64Test`
+## ⚙️ Requirements
+
+- **Android Studio Ladybug** or newer.
+- **Xcode 15+** (for iOS).
+- **Kotlin 2.0.0+**.
+
+## 🏃 Running the Project
+
+### Android
+1. Open the project in Android Studio.
+2. Select the `androidApp` configuration.
+3. Click **Run**.
+
+### iOS
+1. Open the project in Android Studio.
+2. Ensure you have an iOS Simulator or Device configured.
+3. Select the `iosApp` configuration.
+4. Click **Run**.
+*(Alternatively, open the `iosApp` folder in Xcode and run from there).*
+
+## 🧪 Running Tests
+
+- **Shared Tests**: `./gradlew :shared:allTests`
+- **Android Tests**: `./gradlew :shared:testAndroidHostTest`
+- **iOS Tests**: `./gradlew :shared:iosSimulatorArm64Test`
 
 ---
-
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+*Created as a demonstration of Compose Multiplatform capabilities.*
