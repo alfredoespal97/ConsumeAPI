@@ -28,6 +28,15 @@ class RickAndMortyViewModel : ViewModel() {
     private val _searchQuery = MutableStateFlow("")
     val searchQuery: StateFlow<String> = _searchQuery
 
+    private val _characterDetail = MutableStateFlow<Character?>(null)
+    val characterDetail: StateFlow<Character?> = _characterDetail
+
+    private val _locationDetail = MutableStateFlow<Location?>(null)
+    val locationDetail: StateFlow<Location?> = _locationDetail
+
+    private val _episodeDetail = MutableStateFlow<Episode?>(null)
+    val episodeDetail: StateFlow<Episode?> = _episodeDetail
+
     init {
         loadCharacters()
         loadLocations()
@@ -79,5 +88,47 @@ class RickAndMortyViewModel : ViewModel() {
     fun onSearchQueryChange(query: String) {
         _searchQuery.value = query
         loadCharacters(query)
+    }
+
+    fun getCharacter(id: Int) {
+        viewModelScope.launch {
+            _characterDetail.value = null
+            _isLoading.value = true
+            try {
+                _characterDetail.value = api.getCharacter(id)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            } finally {
+                _isLoading.value = false
+            }
+        }
+    }
+
+    fun getLocation(id: Int) {
+        viewModelScope.launch {
+            _locationDetail.value = null
+            _isLoading.value = true
+            try {
+                _locationDetail.value = api.getLocation(id)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            } finally {
+                _isLoading.value = false
+            }
+        }
+    }
+
+    fun getEpisode(id: Int) {
+        viewModelScope.launch {
+            _episodeDetail.value = null
+            _isLoading.value = true
+            try {
+                _episodeDetail.value = api.getEpisode(id)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            } finally {
+                _isLoading.value = false
+            }
+        }
     }
 }

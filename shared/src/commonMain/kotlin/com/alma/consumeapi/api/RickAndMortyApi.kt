@@ -1,8 +1,6 @@
 package com.alma.consumeapi.api
 
-import com.alma.consumeapi.models.CharacterResponse
-import com.alma.consumeapi.models.EpisodeResponse
-import com.alma.consumeapi.models.LocationResponse
+import com.alma.consumeapi.models.*
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.plugins.contentnegotiation.*
@@ -32,15 +30,27 @@ class RickAndMortyApi {
         }.body()
     }
 
+    suspend fun getCharacter(id: Int): Character {
+        return client.get("https://rickandmortyapi.com/api/character/$id").body()
+    }
+
     suspend fun getLocations(page: Int = 1): LocationResponse {
         return client.get("https://rickandmortyapi.com/api/location") {
             parameter("page", page)
         }.body()
     }
 
+    suspend fun getLocation(id: Int): Location {
+        return client.get("https://rickandmortyapi.com/api/location/$id").body()
+    }
+
     suspend fun getEpisodes(page: Int = 1): EpisodeResponse {
         return client.get("https://rickandmortyapi.com/api/episode") {
             parameter("page", page)
         }.body()
+    }
+
+    suspend fun getEpisode(id: Int): Episode {
+        return client.get("https://rickandmortyapi.com/api/episode/$id").body()
     }
 }
